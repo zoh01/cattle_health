@@ -1,5 +1,4 @@
-import 'package:cattle_health/screens/dashboard/dashboard.dart';
-import 'package:cattle_health/screens/splash_screen.dart';
+import 'package:cattle_health/screens/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: ThingSpeakScreens(),
     );
   }
 }
+
