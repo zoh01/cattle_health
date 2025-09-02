@@ -88,15 +88,17 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     }
 
     List<String> issues = [];
-    if (!ambOK)
+    if (!ambOK) {
       issues.add(tempAmb > 30 ? "High Ambient Temp" : "Low Ambient Temp");
+    }
     if (!humOK) issues.add(humidity > 70 ? "High Humidity" : "Low Humidity");
     if (!heartOK) issues.add(heart > 84 ? "High Heart Rate" : "Low Heart Rate");
-    if (!bodyOK)
+    if (!bodyOK) {
       issues.add(tempBody > 39.5 ? "High Body Temp" : "Low Body Temp");
+    }
     if (!airOK) issues.add("Poor Air Quality");
 
-    return "⚠️ Issues: ${issues.join(', ')}";
+    return "Issues: ${issues.join(', ')}";
   }
 
   // 🔮 Predict possible disease based on abnormal patterns
@@ -130,7 +132,7 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
       return "✅ No specific disease detected. Just monitor cattle.";
     }
 
-    return "🩺 Possible Disease(s): ${diseases.join(', ')}";
+    return "Possible Disease(s): ${diseases.join(', ')}";
   }
 
   @override
@@ -188,7 +190,9 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
                 "AQI",
                 isAirQualityOK,
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: ZohSizes.md),
+              Divider(),
+              SizedBox(height: ZohSizes.md),
               _buildHealthCard(healthStatus),
               const SizedBox(height: 20),
               _buildDiseaseCard(predictDisease()),
@@ -213,12 +217,13 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
       final double? val = double.tryParse(value);
       if (val != null) {
         if (validator(val)) {
-          bgColor = Colors.green.shade300;
+          bgColor = Colors.green.shade400;
         } else {
-          bgColor = Colors.red.shade300;
+          bgColor = Colors.red.shade400;
         }
       }
     }
+
     return Material(
       elevation: 4,
       borderRadius: BorderRadius.circular(12),
@@ -275,77 +280,138 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     );
   }
 
+  /// Overall Health Status Card
   Widget _buildHealthCard(String status) {
     Color bgColor = Colors.grey.shade300;
-    IconData icon = Icons.warning;
-    Color iconColor = Colors.black;
+    String healthImage = ZohImages.report;
 
     if (status.contains("Healthy")) {
-      bgColor = Colors.green.shade200;
-      icon = Icons.check_circle;
-      iconColor = Colors.green.shade900;
+      bgColor = Colors.green.shade400;
+      healthImage = ZohImages.check;
     } else if (status.contains("Issues")) {
-      bgColor = Colors.orange.shade200;
-      icon = Icons.report_problem;
-      iconColor = Colors.orange.shade900;
+      bgColor = Colors.red.shade400;
+      healthImage = ZohImages.report;
     }
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 32, color: iconColor),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              "Overall Health Status:\n$status",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Material(
+      borderRadius: BorderRadius.circular(ZohSizes.md),
+      elevation: 5,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(ZohSizes.md),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(ZohSizes.md),
+          color: bgColor,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(ZohSizes.md),
+                  color: Colors.grey.shade400,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image(
+                    image: AssetImage(healthImage),
+                    height: 70,
+                    width: 60,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+            SizedBox(width: ZohSizes.defaultSpace),
+            Expanded(
+              flex: 6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Overall Health Status",
+                    style: TextStyle(
+                      fontSize: ZohSizes.defaultSpace,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Roboto",
+                    ),
+                  ),
+                  Text(status, style: TextStyle(fontSize: ZohSizes.md, fontFamily: "Inter", fontWeight: FontWeight.bold),),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildDiseaseCard(String disease) {
-    Color bgColor = Colors.blue.shade200;
-    IconData icon = Icons.healing;
-    Color iconColor = Colors.blue.shade900;
 
-    if (disease.contains("No specific disease")) {
-      bgColor = Colors.green.shade200;
-      icon = Icons.check_circle;
-      iconColor = Colors.green.shade900;
-    } else if (disease.contains("Possible")) {
-      bgColor = Colors.red.shade200;
-      icon = Icons.local_hospital;
-      iconColor = Colors.red.shade900;
-    }
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 32, color: iconColor),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              "Disease Prediction:\n$disease",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+Widget _buildDiseaseCard(String disease) {
+    Color bgColor = Colors.blue.shade300;
+    String diseaseImage = ZohImages.healing;
+
+      if (disease.contains("No specific disease")) {
+        bgColor = Colors.green.shade300;
+        diseaseImage = ZohImages.check;
+      } else if (disease.contains("Possible")) {
+        bgColor = Colors.red.shade300;
+        diseaseImage = ZohImages.hospital;
+      }
+
+    return Material(
+      borderRadius: BorderRadius.circular(ZohSizes.md),
+      elevation: 5,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(ZohSizes.md),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(ZohSizes.md),
+          color: bgColor,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(ZohSizes.md),
+                  color: Colors.grey.shade400,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image(
+                    image: AssetImage(diseaseImage),
+                    height: 70,
+                    width: 60,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+            SizedBox(width: ZohSizes.defaultSpace),
+            Expanded(
+              flex: 6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Disease Prediction",
+                    style: TextStyle(
+                      fontSize: ZohSizes.defaultSpace,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Roboto",
+                    ),
+                  ),
+                  Text(disease, style: TextStyle(fontSize: ZohSizes.md, fontFamily: "Inter", fontWeight: FontWeight.bold),),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }
+}
 }

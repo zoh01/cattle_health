@@ -33,6 +33,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/health_card/
 
   fonts:
     - family: IBM_Plex_Sans

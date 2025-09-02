@@ -1,5 +1,4 @@
 import 'package:cattle_health/screens/body_temperature/body_temperature.dart';
-import 'package:cattle_health/screens/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {

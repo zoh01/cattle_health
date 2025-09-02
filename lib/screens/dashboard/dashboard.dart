@@ -155,3 +155,80 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
+
+// Widget _buildDiseaseCard(String disease) {
+//   Color bgColor = Colors.blue.shade200;
+//   IconData icon = Icons.healing;
+//   Color iconColor = Colors.blue.shade900;
+//
+//   if (disease.contains("No specific disease")) {
+//     bgColor = Colors.green.shade200;
+//     icon = Icons.check_circle;
+//     iconColor = Colors.green.shade900;
+//   } else if (disease.contains("Possible")) {
+//     bgColor = Colors.red.shade200;
+//     icon = Icons.local_hospital;
+//     iconColor = Colors.red.shade900;
+//   }
+//
+//   return Container(
+//     padding: const EdgeInsets.all(16),
+//     width: double.infinity,
+//     decoration: BoxDecoration(
+//       color: bgColor,
+//       borderRadius: BorderRadius.circular(12),
+//     ),
+//     child: Row(
+//       children: [
+//         Icon(icon, size: 32, color: iconColor),
+//         const SizedBox(width: 12),
+//         Expanded(
+//           child: Text(
+//             "Disease Prediction:\n$disease",
+//             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }
+
+
+
+//
+// Widget _buildHealthCard(String status) {
+//   Color bgColor = Colors.grey.shade300;
+//   IconData icon = Icons.warning;
+//   Color iconColor = Colors.black;
+//
+//   if (status.contains("Healthy")) {
+//     bgColor = Colors.green.shade200;
+//     icon = Icons.check_circle;
+//     iconColor = Colors.green.shade900;
+//   } else if (status.contains("Issues")) {
+//     bgColor = Colors.orange.shade200;
+//     icon = Icons.report_problem;
+//     iconColor = Colors.orange.shade900;
+//   }
+//
+//   return Container(
+//     padding: const EdgeInsets.all(16),
+//     width: double.infinity,
+//     decoration: BoxDecoration(
+//       color: bgColor,
+//       borderRadius: BorderRadius.circular(12),
+//     ),
+//     child: Row(
+//       children: [
+//         Icon(icon, size: 32, color: iconColor),
+//         const SizedBox(width: 12),
+//         Expanded(
+//           child: Text(
+//             "Overall Health Status:\n$status",
+//             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+//           ),
+//         ),
+//       ],
+//     ),
+//   );
+// }
