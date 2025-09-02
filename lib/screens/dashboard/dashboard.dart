@@ -1,579 +1,155 @@
-// import 'dart:convert';
-//
-// import 'package:cattle_health/models/feeds_models.dart';
-// import 'package:cattle_health/screens/login_screen/login.dart';
-// import 'package:cattle_health/services/heart_rate.dart';
-// import 'package:cattle_health/utils/constants/colors.dart';
-// import 'package:cattle_health/utils/constants/image_string.dart';
-// import 'package:cattle_health/utils/constants/sizes.dart';
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-//
-// class Dashboard extends StatefulWidget {
-//   const Dashboard({super.key});
-//
-//   @override
-//   State<Dashboard> createState() => _DashboardState();
-// }
-//
-// class _DashboardState extends State<Dashboard> {
-//   // List<FeedsModel> feeds = [];
-//   // bool loading = true;
-//
-//   // getHeart() async {
-//   //   HeartRate heartClass = HeartRate();
-//   //   await heartClass.getHeart();
-//   //   feeds = heartClass.heart;
-//   //   setState(() {
-//   //     loading = false;
-//   //   });
-//   // }
-//
-//   Future<Album> fetchAlbum() async {
-//     final response = await http.get(Uri.parse('https://api.thingspeak.com/channels/2769547/fields/3.json?api_key=CLC2P68LXMZ7KDN4&results=1'));
-//
-//     if(response.statusCode == 200){
-//       return Album.fromJson(jsonDecode(response.body));
-//     } else {
-//       throw Exception("Failed to load API");
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//         title: Text("Health Dashboard", style: TextStyle(color: Colors.white)),
-//         automaticallyImplyLeading: false,
-//         centerTitle: true,
-//         backgroundColor: ZohColors.secondaryColor,
-//         actions: [
-//           Padding(
-//             padding: const EdgeInsets.only(right: ZohSizes.sm),
-//             child: IconButton(
-//               onPressed: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => Login()),
-//                 );
-//               },
-//               icon: Icon(Icons.logout, color: Colors.white),
-//             ),
-//           ),
-//         ],
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: const EdgeInsets.all(ZohSizes.defaultSpace),
-//           child: Column(
-//             children: [
-//             Material(
-//             elevation: 4,
-//             borderRadius: BorderRadius.circular(ZohSizes.md),
-//             child: Container(
-//               width: double.infinity,
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(ZohSizes.md),
-//                 color: Colors.white,
-//                 border: Border.all(color: Colors.white),
-//               ),
-//               child: Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Container(
-//                       decoration: BoxDecoration(
-//                         color: Colors.grey.shade300,
-//                         borderRadius: BorderRadius.circular(
-//                           ZohSizes.md,
-//                         ),
-//                       ),
-//                       child: Padding(
-//                         padding: const EdgeInsets.all(ZohSizes.md),
-//                         child: Image(
-//                           image: AssetImage(ZohImages.heartRate),
-//                           height: 90,
-//                           width: 70,
-//                         ),
-//                       ),
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.all(ZohSizes.md),
-//                       child: Column(
-//                         mainAxisAlignment:
-//                         MainAxisAlignment.spaceBetween,
-//                         crossAxisAlignment: CrossAxisAlignment.end,
-//                         children: [
-//                           Text(
-//                             'Heart Rate',
-//                             style: TextStyle(
-//                               fontFamily: 'Roboto',
-//                               fontWeight: FontWeight.bold,
-//                               fontSize: ZohSizes.spaceBtwItems,
-//                             ),
-//                           ),
-//                           Text(
-//                             'War',
-//                             style: TextStyle(
-//                               fontFamily: 'Roboto',
-//                               fontWeight: FontWeight.bold,
-//                               fontSize: ZohSizes.spaceBtwItems,
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//               SizedBox(height: ZohSizes.spaceBtwZoh),
-//               Material(
-//                 elevation: 4,
-//                 borderRadius: BorderRadius.circular(ZohSizes.md),
-//                 child: Container(
-//                   width: double.infinity,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(ZohSizes.md),
-//                     color: Colors.white,
-//                     border: Border.all(color: Colors.white),
-//                   ),
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Container(
-//                           decoration: BoxDecoration(
-//                             color: Colors.grey.shade300,
-//                             borderRadius: BorderRadius.circular(ZohSizes.md),
-//                           ),
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(ZohSizes.md),
-//                             child: Image(
-//                               image: AssetImage(ZohImages.temp),
-//                               height: 90,
-//                               width: 70,
-//                             ),
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(ZohSizes.md),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             crossAxisAlignment: CrossAxisAlignment.end,
-//                             children: [
-//                               Text(
-//                                 'Temperature',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 '27.6 \u00B0C',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: ZohSizes.spaceBtwZoh),
-//               Material(
-//                 elevation: 4,
-//                 borderRadius: BorderRadius.circular(ZohSizes.md),
-//                 child: Container(
-//                   width: double.infinity,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(ZohSizes.md),
-//                     color: Colors.white,
-//                     border: Border.all(color: Colors.white),
-//                   ),
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Container(
-//                           decoration: BoxDecoration(
-//                             color: Colors.grey.shade300,
-//                             borderRadius: BorderRadius.circular(ZohSizes.md),
-//                           ),
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(ZohSizes.md),
-//                             child: Image(
-//                               image: AssetImage(ZohImages.humidity),
-//                               height: 90,
-//                               width: 70,
-//                             ),
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(ZohSizes.md),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             crossAxisAlignment: CrossAxisAlignment.end,
-//                             children: [
-//                               Text(
-//                                 'Humidity',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 '69 %',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: ZohSizes.spaceBtwZoh),
-//               Material(
-//                 elevation: 4,
-//                 borderRadius: BorderRadius.circular(ZohSizes.md),
-//                 child: Container(
-//                   width: double.infinity,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(ZohSizes.md),
-//                     color: Colors.white,
-//                     border: Border.all(color: Colors.white),
-//                   ),
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Container(
-//                           decoration: BoxDecoration(
-//                             color: Colors.grey.shade300,
-//                             borderRadius: BorderRadius.circular(ZohSizes.md),
-//                           ),
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(ZohSizes.md),
-//                             child: Image(
-//                               image: AssetImage(ZohImages.ambientTemp),
-//                               height: 90,
-//                               width: 70,
-//                             ),
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(ZohSizes.md),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             crossAxisAlignment: CrossAxisAlignment.end,
-//                             children: [
-//                               Text(
-//                                 'Ambient Temperature',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 '24.9 \u00B0C',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                                 textAlign: TextAlign.end,
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: ZohSizes.spaceBtwZoh),
-//               Material(
-//                 elevation: 4,
-//                 borderRadius: BorderRadius.circular(ZohSizes.md),
-//                 child: Container(
-//                   width: double.infinity,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(ZohSizes.md),
-//                     color: Colors.white,
-//                     border: Border.all(color: Colors.white),
-//                   ),
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(8.0),
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Container(
-//                           decoration: BoxDecoration(
-//                             color: Colors.grey.shade300,
-//                             borderRadius: BorderRadius.circular(ZohSizes.md),
-//                           ),
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(ZohSizes.md),
-//                             child: Image(
-//                               image: AssetImage(ZohImages.airQuality),
-//                               height: 90,
-//                               width: 70,
-//                             ),
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(ZohSizes.md),
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             crossAxisAlignment: CrossAxisAlignment.end,
-//                             children: [
-//                               Text(
-//                                 'Air Quality',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                               Text(
-//                                 '75 %',
-//                                 style: TextStyle(
-//                                   fontFamily: 'Roboto',
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: ZohSizes.spaceBtwItems,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               ElevatedButton(onPressed: () {
-//                 fetchAlbum().then((value) {
-//                   print(value.field3);
-//                 });
-//               }, child: Text('Wariz'))
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// class Album {
-//   final int entry_id;
-//   final String field3;
-//
-//   Album({required this.entry_id, required this.field3});
-//
-//   factory Album.fromJson(Map<String,dynamic> json) {
-//     return Album(entry_id: json['entry_id'], field3: json['entry_id']);
-//   }
-// }
-
 import 'dart:async';
+
+import 'package:cattle_health/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import '../../services/thingspeak.dart';
-import '../../utils/constants/image_string.dart';
-import '../../utils/constants/sizes.dart';
 
-class ThingSpeakScreen extends StatefulWidget {
-  const ThingSpeakScreen({Key? key}) : super(key: key);
+import '../../services/testing.dart';
 
-  @override
-  State<ThingSpeakScreen> createState() => _ThingSpeakScreenState();
-}
-
-class _ThingSpeakScreenState extends State<ThingSpeakScreen> {
-  // String? latestValue;
-  // String? lastEntryId;
-  // List<String> history = [];
-  // Timer? _timer;
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _checkForNewData();
-  //
-  //   // 🔁 Poll API every 5 seconds
-  //   _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
-  //     _checkForNewData();
-  //   });
-  // }
-  //
-  // Future<void> _checkForNewData() async {
-  //   final service = ThingSpeakService();
-  //   final feed = await service.fetchLatestFeed();
-  //
-  //   if (feed != null) {
-  //     final newEntryId = feed["entry_id"].toString();
-  //     final newValue = feed["field4"].toString();
-  //
-  //     if (lastEntryId != newEntryId) {
-  //       // ✅ New data arrived
-  //       setState(() {
-  //         lastEntryId = newEntryId;
-  //         latestValue = newValue;
-  //         history.insert(0, newValue); // keep newest at top
-  //       });
-  //     }
-  //   }
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _timer?.cancel(); // stop polling when screen closes
-  //   super.dispose();
-  // }
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("ThingSpeak Auto Refresh (New Data)")),
-      body: Column(children: [BodyTemp(),
-      BodyTemp()]),
-    );
-  }
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class BodyTemp extends StatefulWidget {
-  const BodyTemp({super.key});
+class _DashboardState extends State<Dashboard> {
+  // Store latest & previous values
+  String? latestField1, previousField1; // Ambient Temp
+  String? latestField2, previousField2; // Humidity
+  String? latestField3, previousField3; // Heart Rate
+  String? latestField4, previousField4; // Body Temp
+  String? latestField5, previousField5; // Air Quality
 
-  @override
-  State<BodyTemp> createState() => _BodyTempState();
-}
-
-class _BodyTempState extends State<BodyTemp> {
-  String? latestValue;
-  String? lastEntryId;
-  List<String> history = [];
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _checkForNewData();
+    _loadLatestData();
 
-    // 🔁 Poll API every 5 seconds
+    // Auto refresh every 60 seconds
     _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
-      _checkForNewData();
+      _loadLatestData();
     });
   }
 
-  Future<void> _checkForNewData() async {
+  Future<void> _loadLatestData() async {
     final service = ThingSpeakService();
-    final feed = await service.fetchLatestFeed();
+    final feed = await service.fetchLatestData();
 
     if (feed != null) {
-      final newEntryId = feed["entry_id"].toString();
-      final newValue = feed["field4"].toString();
+      setState(() {
+        void updateField(
+            String key,
+            void Function(String) updateLatest,
+            void Function(String) updatePrev,
+            ) {
+          final newValue = feed[key]?.toString();
+          if (newValue != null) {
+            final old =
+            {
+              "field1": latestField1,
+              "field2": latestField2,
+              "field3": latestField3,
+              "field4": latestField4,
+              "field5": latestField5,
+            }[key];
+            if (old != null) updatePrev(old);
+            updateLatest(newValue);
+          }
+        }
 
-      if (lastEntryId != newEntryId) {
-        // ✅ New data arrived
-        setState(() {
-          lastEntryId = newEntryId;
-          latestValue = newValue;
-          history.insert(0, newValue); // keep newest at top
-        });
-      }
+        updateField(
+          "field1",
+              (v) => latestField1 = v,
+              (v) => previousField1 = v,
+        );
+        updateField(
+          "field2",
+              (v) => latestField2 = v,
+              (v) => previousField2 = v,
+        );
+        updateField(
+          "field3",
+              (v) => latestField3 = v,
+              (v) => previousField3 = v,
+        );
+        updateField(
+          "field4",
+              (v) => latestField4 = v,
+              (v) => previousField4 = v,
+        );
+        updateField(
+          "field5",
+              (v) => latestField5 = v,
+              (v) => previousField5 = v,
+        );
+      });
+    }
+  }
+
+  // Health detection logic
+  String detectCattleHealth({
+    String? ambientStr,
+    String? humidityStr,
+    String? heartStr,
+    String? bodyTempStr,
+    String? airStr,
+  }) {
+    final ambient = double.tryParse(ambientStr ?? "");
+    final humidity = double.tryParse(humidityStr ?? "");
+    final heart = double.tryParse(heartStr ?? "");
+    final bodyTemp = double.tryParse(bodyTempStr ?? "");
+    final air = double.tryParse(airStr ?? "");
+
+    if ([ambient, humidity, heart, bodyTemp].any((v) => v == null)) {
+      return "⚠️ Incomplete Data";
+    }
+
+    List<String> issues = [];
+
+    // Ambient temp
+    if (ambient! < 5) issues.add("❄️ Cold Stress (Low Ambient Temp)");
+    if (ambient > 25) issues.add("🔥 Heat Stress (High Ambient Temp)");
+
+    // Humidity
+    if (humidity! < 30) issues.add("💧 Low Humidity (Dehydration Risk)");
+    if (humidity > 70) issues.add("🌫 High Humidity (Heat Stress Risk)");
+
+    // Body temp
+    if (bodyTemp! < 38) issues.add("❄️ Low Body Temp (Hypothermia)");
+    if (bodyTemp > 39.5) issues.add("🔥 Fever / Infection");
+
+    // Heart rate
+    if (heart! < 48) issues.add("💤 Low Heart Rate (Weakness)");
+    if (heart > 84) issues.add("💓 High Heart Rate (Stress)");
+
+    // Air Quality
+    if (air != null && air > 100) {
+      issues.add("🌬 Poor Air Quality (Respiratory Risk)");
+    }
+
+    // Final decision
+    if (issues.isEmpty) {
+      return "✅ Normal (Healthy)";
+    } else {
+      return issues.join(" | ");
     }
   }
 
   @override
   void dispose() {
-    _timer?.cancel(); // stop polling when screen closes
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 4,
-      borderRadius: BorderRadius.circular(ZohSizes.md),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(ZohSizes.md),
-          color: Colors.white,
-          border: Border.all(color: Colors.white),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(
-                        ZohSizes.md,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(ZohSizes.md),
-                      child: Image(
-                        image: AssetImage(ZohImages.heartRate),
-                        height: 90,
-                        width: 70,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(ZohSizes.md),
-                    child: Column(
-                      mainAxisAlignment:
-                      MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Present Heart Rate',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: ZohSizes.spaceBtwItems,
-                          ),
-                        ),
-                        Text(
-                          latestValue != null ? "$latestValue B/M" : "Waiting",
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: ZohSizes.spaceBtwItems,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(ZohSizes.md),
+        child: Column(
+
         ),
       ),
     );
