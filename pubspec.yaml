@@ -19,6 +19,7 @@ dependencies:
   shimmer: ^3.0.0
   iconsax: ^0.0.8
   http: ^1.5.0
+  flutter_local_notifications: ^19.4.1
 
 dev_dependencies:
   flutter_test:
