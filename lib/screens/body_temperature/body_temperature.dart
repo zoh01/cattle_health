@@ -220,7 +220,6 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
         bgColor = validator(val) ? Colors.green.shade400 : Colors.red.shade400;
       }
     }
-
     return Material(
       elevation: 4,
       borderRadius: BorderRadius.circular(12),
