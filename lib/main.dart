@@ -1,4 +1,4 @@
-import 'package:cattle_health/screens/body_temperature/body_temperature.dart';
+import 'package:cattle_health/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ZohSpeakScreens(),
+      home: SplashScreen(),
     );
   }
 }

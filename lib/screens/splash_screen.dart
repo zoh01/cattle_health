@@ -12,6 +12,7 @@ import 'package:shimmer/shimmer.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/sizes.dart';
 import '../utils/constants/text_string.dart';
+import 'dashboard/dashboard.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,9 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 8)).then((zoh) {
+    Future.delayed(const Duration(seconds: 7)).then((zoh) {
       Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (ctx) => const Login()));
+          CupertinoPageRoute(builder: (ctx) => const ZohSpeakScreens()));
     });
     loadData();
   }
@@ -43,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white54,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(ZohSizes.defaultSpace),
