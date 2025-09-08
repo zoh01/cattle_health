@@ -57,6 +57,16 @@ class _ValueCardState extends State<ValueCard> {
       }
     }
 
+    /// Calculate Difference (Latest - Previous)
+    double? difference;
+    if (widget.value != null && widget.prevValue != null) {
+      final latest = double.tryParse(widget.value!);
+      final prev = double.tryParse(widget.prevValue!);
+      if (latest != null && prev != null) {
+        difference = latest - prev;
+      }
+    }
+
     return shimmer
         ? Shimmer.fromColors(
           baseColor: Colors.white70,
@@ -132,6 +142,31 @@ class _ValueCardState extends State<ValueCard> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: ZohSizes.iconXs,
                                 fontFamily: "Inter",
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      /// Show Difference if available
+                      if (difference != null)
+                        Row(
+                          children: [
+                            Icon(
+                              difference > 0
+                                  ? Icons.arrow_upward
+                                  : Icons.arrow_downward,
+                              color: difference > 0 ? Colors.green : Colors.red,
+                              size: ZohSizes.md,
+                            ),
+                            SizedBox(width: ZohSizes.sm),
+                            Text(
+                              "${difference.toStringAsFixed(2)} ${widget.unit}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: ZohSizes.iconXs,
+                                fontFamily: "Inter",
+                                color:
+                                    difference > 0 ? Colors.green : Colors.red,
                               ),
                             ),
                           ],
@@ -218,11 +253,35 @@ class _ValueCardState extends State<ValueCard> {
                           ),
                         ],
                       ),
+
+                    /// Show Difference if available
+                    if (difference != null)
+                      Row(
+                        children: [
+                          Icon(
+                            difference > 0
+                                ? Icons.arrow_upward
+                                : Icons.arrow_downward,
+                            color: difference > 0 ? Colors.green : Colors.red,
+                            size: ZohSizes.md,
+                          ),
+                          SizedBox(width: ZohSizes.sm),
+                          Text(
+                            "${difference.toStringAsFixed(2)} ${widget.unit}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: ZohSizes.iconXs,
+                              fontFamily: "Inter",
+                              color: difference > 0 ? Colors.green : Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ],
             ),
-          ),
+          )
         );
   }
 }

@@ -161,6 +161,9 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     if (tempBody < 38 && heart! < 48) {
       diseases.add("Hypothermia");
     }
+    if (tempBody < 38 && humidity! > 70) {
+      diseases.add("Ketosis");
+    }
     if (tempAmb! > 30 && humidity! > 70) {
       diseases.add("Mastitis");
     }
