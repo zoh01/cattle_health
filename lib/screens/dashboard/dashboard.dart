@@ -213,7 +213,7 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
               const SizedBox(height: 12),
               ValueCard(image: ZohImages.temp, title: "Body Temp", value: field4, prevValue: prevField4, unit: "°C", validator: isBodyTempOK),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.airQuality, title: "Air Quality Index", value: field5, prevValue: prevField5, unit: "AQI", validator: isAirQualityOK),
+              ValueCard(image: ZohImages.airQuality, title: "Air Quality", value: field5, prevValue: prevField5, unit: "AQI", validator: isAirQualityOK),
               SizedBox(height: ZohSizes.md),
               Divider(),
               SizedBox(height: ZohSizes.md),

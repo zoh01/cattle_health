@@ -206,77 +206,96 @@ class _ValueCardState extends State<ValueCard> {
                     ),
                   ),
                 ),
+                Text(
+                  widget.title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: ZohSizes.md,
+                    fontFamily: "Roboto",
+                  ),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          widget.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: ZohSizes.md,
-                            fontFamily: "Roboto",
-                          ),
+                    Material(
+                      elevation: 3,
+                      borderRadius: BorderRadius.circular(ZohSizes.md),
+                      child: Container(
+                        padding: EdgeInsets.all(ZohSizes.sm),
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(ZohSizes.md),
                         ),
-                        Text(
-                          widget.value != null
-                              ? "${widget.value} ${widget.unit}"
-                              : "Pending...",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: ZohSizes.fontSizeSm,
-                            fontFamily: "Inter",
-                          ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.access_time_rounded,
+                                  color: ZohColors.darkerGrey,
+                                  size: ZohSizes.defaultSpace,
+                                ),
+                                SizedBox(width: ZohSizes.sm),
+                                Text(
+                                  widget.value != null
+                                      ? "${widget.value} ${widget.unit}"
+                                      : "Pending...",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: ZohSizes.md,
+                                    fontFamily: "Inter",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            /// Show PreValue if latest exist
+                            if (widget.value != null && widget.prevValue != null)
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.history_rounded,
+                                    color: ZohColors.darkerGrey,
+                                    size: ZohSizes.md,
+                                  ),
+                                  SizedBox(width: ZohSizes.sm),
+                                  Text(
+                                    "${widget.prevValue} ${widget.unit}",
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: ZohSizes.iconXs,
+                                      fontFamily: "Inter",
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                            /// Show Difference if available
+                            if (difference != null)
+                              Row(
+                                children: [
+                                  Icon(
+                                    difference > 0
+                                        ? Icons.arrow_upward
+                                        : Icons.arrow_downward,
+                                    color: difference > 0 ? Colors.green : Colors.red,
+                                    size: ZohSizes.md,
+                                  ),
+                                  SizedBox(width: ZohSizes.sm),
+                                  Text(
+                                    "${difference.toStringAsFixed(2)} ${widget.unit}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: ZohSizes.iconXs,
+                                      fontFamily: "Inter",
+                                      color: difference > 0 ? Colors.green : Colors.red,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-
-                    /// Show PreValue if latest exist
-                    if (widget.value != null && widget.prevValue != null)
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.history_rounded,
-                            color: ZohColors.darkerGrey,
-                            size: ZohSizes.md,
-                          ),
-                          SizedBox(width: ZohSizes.sm),
-                          Text(
-                            "${widget.prevValue} ${widget.unit}",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: ZohSizes.iconXs,
-                              fontFamily: "Inter",
-                            ),
-                          ),
-                        ],
-                      ),
-
-                    /// Show Difference if available
-                    if (difference != null)
-                      Row(
-                        children: [
-                          Icon(
-                            difference > 0
-                                ? Icons.arrow_upward
-                                : Icons.arrow_downward,
-                            color: difference > 0 ? Colors.green : Colors.red,
-                            size: ZohSizes.md,
-                          ),
-                          SizedBox(width: ZohSizes.sm),
-                          Text(
-                            "${difference.toStringAsFixed(2)} ${widget.unit}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: ZohSizes.iconXs,
-                              fontFamily: "Inter",
-                              color: difference > 0 ? Colors.green : Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
                   ],
                 ),
               ],
