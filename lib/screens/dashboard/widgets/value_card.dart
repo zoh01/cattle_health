@@ -218,12 +218,12 @@ class _ValueCardState extends State<ValueCard> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Material(
-                      elevation: 3,
+                      elevation: 4,
                       borderRadius: BorderRadius.circular(ZohSizes.md),
                       child: Container(
                         padding: EdgeInsets.all(ZohSizes.sm),
                         decoration: BoxDecoration(
-                          color: Colors.grey,
+                          color: Colors.blueGrey,
                           borderRadius: BorderRadius.circular(ZohSizes.md),
                         ),
                         child: Column(
@@ -255,14 +255,14 @@ class _ValueCardState extends State<ValueCard> {
                                   Icon(
                                     Icons.history_rounded,
                                     color: ZohColors.darkerGrey,
-                                    size: ZohSizes.md,
+                                    size: ZohSizes.spaceBtwZoh,
                                   ),
                                   SizedBox(width: ZohSizes.sm),
                                   Text(
                                     "${widget.prevValue} ${widget.unit}",
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: ZohSizes.iconXs,
+                                      fontSize: ZohSizes.fontSizeSm,
                                       fontFamily: "Inter",
                                     ),
                                   ),
@@ -278,14 +278,14 @@ class _ValueCardState extends State<ValueCard> {
                                         ? Icons.arrow_upward
                                         : Icons.arrow_downward,
                                     color: difference > 0 ? Colors.green : Colors.red,
-                                    size: ZohSizes.md,
+                                    size: ZohSizes.spaceBtwZoh,
                                   ),
                                   SizedBox(width: ZohSizes.sm),
                                   Text(
                                     "${difference.toStringAsFixed(2)} ${widget.unit}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: ZohSizes.iconXs,
+                                      fontSize: ZohSizes.fontSizeSm,
                                       fontFamily: "Inter",
                                       color: difference > 0 ? Colors.green : Colors.red,
                                     ),
