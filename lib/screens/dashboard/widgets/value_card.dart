@@ -13,6 +13,7 @@ class ValueCard extends StatefulWidget {
     required this.prevValue,
     required this.unit,
     required this.validator,
+    required this.diseasePredictor,
   });
 
   final String image;
@@ -21,6 +22,7 @@ class ValueCard extends StatefulWidget {
   final String? prevValue;
   final String unit;
   final bool Function(double p1) validator;
+  final String? Function(String title, double value) diseasePredictor;
 
   @override
   State<ValueCard> createState() => _ValueCardState();
@@ -64,6 +66,20 @@ class _ValueCardState extends State<ValueCard> {
       final prev = double.tryParse(widget.prevValue!);
       if (latest != null && prev != null) {
         difference = latest - prev;
+      }
+    }
+
+    /// Disease Prediction
+    String? diseasePrediction;
+    if (widget.value != null) {
+      final val = double.tryParse(widget.value!);
+      if (val != null) {
+        diseasePrediction = widget.diseasePredictor(widget.title, val);
+
+        // If predictor returns null → means no disease → Normal
+        if (diseasePrediction == null || diseasePrediction.isEmpty) {
+          diseasePrediction = "Normal";
+        }
       }
     }
 
@@ -188,119 +204,166 @@ class _ValueCardState extends State<ValueCard> {
               color: bgColor,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(ZohSizes.md),
-                    color: Colors.grey.shade300,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(ZohSizes.md),
-                    child: Image(
-                      image: AssetImage(widget.image),
-                      fit: BoxFit.contain,
-                      height: 70,
-                      width: 60,
-                    ),
-                  ),
-                ),
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: ZohSizes.md,
-                    fontFamily: "Roboto",
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Material(
-                      elevation: 4,
-                      borderRadius: BorderRadius.circular(ZohSizes.md),
-                      child: Container(
-                        padding: EdgeInsets.all(ZohSizes.sm),
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          borderRadius: BorderRadius.circular(ZohSizes.md),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_rounded,
-                                  color: ZohColors.darkerGrey,
-                                  size: ZohSizes.defaultSpace,
-                                ),
-                                SizedBox(width: ZohSizes.sm),
-                                Text(
-                                  widget.value != null
-                                      ? "${widget.value} ${widget.unit}"
-                                      : "Pending...",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: ZohSizes.md,
-                                    fontFamily: "Inter",
-                                  ),
-                                ),
-                              ],
-                            ),
-                            /// Show PreValue if latest exist
-                            if (widget.value != null && widget.prevValue != null)
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.history_rounded,
-                                    color: ZohColors.darkerGrey,
-                                    size: ZohSizes.spaceBtwZoh,
-                                  ),
-                                  SizedBox(width: ZohSizes.sm),
-                                  Text(
-                                    "${widget.prevValue} ${widget.unit}",
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: ZohSizes.fontSizeSm,
-                                      fontFamily: "Inter",
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            /// Show Difference if available
-                            if (difference != null)
-                              Row(
-                                children: [
-                                  Icon(
-                                    difference > 0
-                                        ? Icons.arrow_upward
-                                        : Icons.arrow_downward,
-                                    color: difference > 0 ? Colors.green : Colors.red,
-                                    size: ZohSizes.spaceBtwZoh,
-                                  ),
-                                  SizedBox(width: ZohSizes.sm),
-                                  Text(
-                                    "${difference.toStringAsFixed(2)} ${widget.unit}",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: ZohSizes.fontSizeSm,
-                                      fontFamily: "Inter",
-                                      color: difference > 0 ? Colors.green : Colors.red,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                          ],
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(ZohSizes.md),
+                        color: Colors.grey.shade300,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(ZohSizes.md),
+                        child: Image(
+                          image: AssetImage(widget.image),
+                          fit: BoxFit.contain,
+                          height: 70,
+                          width: 60,
                         ),
                       ),
                     ),
+                    Text(
+                      widget.title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: ZohSizes.md,
+                        fontFamily: "Roboto",
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Material(
+                          elevation: 4,
+                          borderRadius: BorderRadius.circular(ZohSizes.md),
+                          child: Container(
+                            padding: EdgeInsets.all(ZohSizes.sm),
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey,
+                              borderRadius: BorderRadius.circular(ZohSizes.md),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.access_time_rounded,
+                                      color: ZohColors.darkerGrey,
+                                      size: ZohSizes.defaultSpace,
+                                    ),
+                                    SizedBox(width: ZohSizes.sm),
+                                    Text(
+                                      widget.value != null
+                                          ? "${widget.value} ${widget.unit}"
+                                          : "Pending...",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: ZohSizes.md,
+                                        fontFamily: "Inter",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                /// Show PreValue if latest exist
+                                if (widget.value != null &&
+                                    widget.prevValue != null)
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.history_rounded,
+                                        color: ZohColors.darkerGrey,
+                                        size: ZohSizes.spaceBtwZoh,
+                                      ),
+                                      SizedBox(width: ZohSizes.sm),
+                                      Text(
+                                        "${widget.prevValue} ${widget.unit}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: ZohSizes.fontSizeSm,
+                                          fontFamily: "Inter",
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                /// Show Difference if available
+                                if (difference != null)
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        difference > 0
+                                            ? Icons.arrow_upward
+                                            : Icons.arrow_downward,
+                                        color:
+                                            difference > 0
+                                                ? Colors.green
+                                                : Colors.red,
+                                        size: ZohSizes.spaceBtwZoh,
+                                      ),
+                                      SizedBox(width: ZohSizes.sm),
+                                      Text(
+                                        "${difference.toStringAsFixed(2)} ${widget.unit}",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: ZohSizes.fontSizeSm,
+                                          fontFamily: "Inter",
+                                          color:
+                                              difference > 0
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
+
+                /// Disease Prediction (Normal or Abnormal)
+                if (diseasePrediction != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          diseasePrediction == "Normal"
+                              ? Icons.check_circle
+                              : Icons.sick,
+                          color:
+                              diseasePrediction == "Normal"
+                                  ? Colors.green
+                                  : Colors.orange,
+                          size: ZohSizes.md,
+                        ),
+                        const SizedBox(width: ZohSizes.sm),
+                        Expanded(
+                          child: Text(
+                            diseasePrediction!,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: ZohSizes.fontSizeSm,
+                              fontFamily: "Inter",
+                              color:
+                                  diseasePrediction == "Normal"
+                                      ? Colors.green
+                                      : Colors.orange,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             ),
-          )
+          ),
         );
   }
 }

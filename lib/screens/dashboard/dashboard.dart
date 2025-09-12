@@ -177,9 +177,39 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     if (diseases.isEmpty) {
       return "✅ No specific disease detected. Just monitor cattle.";
     }
-
     return "Possible Disease(s): ${diseases.join(', ')}";
   }
+
+  String? getFieldDisease(String title, double value) {
+    switch (title) {
+      case "Ambient Temp":
+        if (value > 30) return "⚠ Heat Stress Risk";
+        if (value < 15) return "⚠ Cold Stress Risk";
+        break;
+
+      case "Humidity":
+        if (value > 70) return "⚠ Pneumonia Risk";
+        if (value < 40) return "⚠ Dehydration Risk";
+        break;
+
+      case "Heart Rate":
+        if (value > 84) return "⚠ Fever / Infection Risk";
+        if (value < 48) return "⚠ Shock Risk";
+        break;
+
+      case "Body Temp":
+        if (value > 39.5) return "⚠ Fever / Mastitis";
+        if (value < 38) return "⚠ Hypothermia Risk";
+        break;
+
+      case "Air Quality":
+        if (value > 100) return "⚠ Respiratory Disease Risk";
+        break;
+    }
+    return null; // Normal ✅
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -205,15 +235,15 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
           padding: const EdgeInsets.all(ZohSizes.md),
           child: Column(
             children: [
-              ValueCard(image: ZohImages.ambientTemp, title: "Ambient Temp", value: field1, prevValue: prevField1, unit: "°C", validator: isAmbientTempOK),
+              ValueCard(image: ZohImages.ambientTemp, title: "Ambient Temp", value: field1, prevValue: prevField1, unit: "°C", validator: isAmbientTempOK, diseasePredictor: getFieldDisease,),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.humidity, title: "Humidity", value: field2, prevValue: prevField2, unit: "%", validator: isHumidityOK),
+              ValueCard(image: ZohImages.humidity, title: "Humidity", value: field2, prevValue: prevField2, unit: "%", validator: isHumidityOK, diseasePredictor: getFieldDisease,),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.heartRate, title: "Heart Rate", value: field3, prevValue: prevField3, unit: "bpm", validator: isHeartRateOK),
+              ValueCard(image: ZohImages.heartRate, title: "Heart Rate", value: field3, prevValue: prevField3, unit: "bpm", validator: isHeartRateOK, diseasePredictor: getFieldDisease,),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.temp, title: "Body Temp", value: field4, prevValue: prevField4, unit: "°C", validator: isBodyTempOK),
+              ValueCard(image: ZohImages.temp, title: "Body Temp", value: field4, prevValue: prevField4, unit: "°C", validator: isBodyTempOK, diseasePredictor: getFieldDisease,),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.airQuality, title: "Air Quality", value: field5, prevValue: prevField5, unit: "AQI", validator: isAirQualityOK),
+              ValueCard(image: ZohImages.airQuality, title: "Air Quality", value: field5, prevValue: prevField5, unit: "AQI", validator: isAirQualityOK, diseasePredictor: getFieldDisease,),
               SizedBox(height: ZohSizes.md),
               Divider(),
               SizedBox(height: ZohSizes.md),
