@@ -83,7 +83,7 @@ class _DiseaseCardState extends State<DiseaseCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Disease Prediction",
+                          "Overall Disease Prediction",
                           style: TextStyle(
                             fontSize: ZohSizes.defaultSpace,
                             fontWeight: FontWeight.bold,

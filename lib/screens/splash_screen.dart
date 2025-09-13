@@ -1,15 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:cattle_health/screens/login_screen/login.dart';
 import 'package:cattle_health/utils/constants/image_string.dart';
-import 'package:cattle_health/utils/device_utils/device_utilities.dart';
-import 'package:cattle_health/utils/helper_function/helper_functions.dart';
-import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../utils/constants/colors.dart';
 import '../utils/constants/sizes.dart';
 import '../utils/constants/text_string.dart';
 import 'dashboard/dashboard.dart';

@@ -183,27 +183,27 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
   String? getFieldDisease(String title, double value) {
     switch (title) {
       case "Ambient Temp":
-        if (value > 30) return "⚠ Heat Stress Risk";
-        if (value < 15) return "⚠ Cold Stress Risk";
+        if (value > 30) return "Heat Stress Risk";
+        if (value < 15) return "Cold Stress Risk";
         break;
 
       case "Humidity":
-        if (value > 70) return "⚠ Pneumonia Risk";
-        if (value < 40) return "⚠ Dehydration Risk";
+        if (value > 70) return "Pneumonia Risk";
+        if (value < 40) return "Dehydration Risk";
         break;
 
       case "Heart Rate":
-        if (value > 84) return "⚠ Fever / Infection Risk";
-        if (value < 48) return "⚠ Shock Risk";
+        if (value > 84) return "Fever / Infection Risk";
+        if (value < 48) return "Shock Risk";
         break;
 
       case "Body Temp":
-        if (value > 39.5) return "⚠ Fever / Mastitis";
-        if (value < 38) return "⚠ Hypothermia Risk";
+        if (value > 39.5) return "Fever / Mastitis";
+        if (value < 38) return "Hypothermia Risk";
         break;
 
       case "Air Quality":
-        if (value > 100) return "⚠ Respiratory Disease Risk";
+        if (value > 100) return "Respiratory Disease Risk";
         break;
     }
     return null; // Normal ✅
