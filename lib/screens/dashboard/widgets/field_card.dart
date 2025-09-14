@@ -76,7 +76,7 @@ class FieldCard extends StatelessWidget {
                               children: [
                                 Icon(
                                   Icons.access_time_rounded,
-                                  color: ZohColors.darkerGrey,
+                                  color: ZohColors.secondaryColor,
                                   size: ZohSizes.defaultSpace,
                                 ),
                                 SizedBox(width: ZohSizes.sm),
@@ -100,7 +100,7 @@ class FieldCard extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.history_rounded,
-                                    color: ZohColors.darkerGrey,
+                                    color: ZohColors.secondaryColor,
                                     size: ZohSizes.spaceBtwZoh,
                                   ),
                                   SizedBox(width: ZohSizes.sm),

@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: AnimatedTextKit(
                       animatedTexts: [
                         TypewriterAnimatedText(
-                          ZohTextString.splashText,
+                          ZohTextString.splashText2,
                         ),
                       ],
                     ),
@@ -92,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: AnimatedTextKit(
                     animatedTexts: [
                       TypewriterAnimatedText(
-                        ZohTextString.splashText,
+                        ZohTextString.splashText2,
                       ),
                     ],
                   ),
