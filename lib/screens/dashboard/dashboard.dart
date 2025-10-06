@@ -206,9 +206,8 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
         if (value > 100) return "Respiratory Disease Risk";
         break;
     }
-    return null; // Normal ✅
+    return null;
   }
-
 
 
   @override

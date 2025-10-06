@@ -101,14 +101,14 @@ class FieldCard extends StatelessWidget {
                                   Icon(
                                     Icons.history_rounded,
                                     color: ZohColors.secondaryColor,
-                                    size: ZohSizes.spaceBtwZoh,
+                                    size: ZohSizes.defaultSpace,
                                   ),
                                   SizedBox(width: ZohSizes.sm),
                                   Text(
                                     "${widget.prevValue} ${widget.unit}",
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: ZohSizes.fontSizeSm,
+                                      fontSize: ZohSizes.md,
                                       fontFamily: "Inter",
                                     ),
                                   ),
@@ -127,14 +127,14 @@ class FieldCard extends StatelessWidget {
                                         difference! > 0
                                             ? Colors.green
                                             : Colors.red,
-                                    size: ZohSizes.spaceBtwZoh,
+                                    size: ZohSizes.defaultSpace,
                                   ),
                                   SizedBox(width: ZohSizes.sm),
                                   Text(
                                     "${difference?.toStringAsFixed(2)} ${widget.unit}",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: ZohSizes.fontSizeSm,
+                                      fontSize: ZohSizes.md,
                                       fontFamily: "Inter",
                                       color:
                                           difference! > 0
