@@ -10,6 +10,8 @@ Also, a Flutter Mobile App to help farmers track cattle health, detect risks ear
 This project provides real-time monitoring of cattle using environmental and biometric sensors connected to an ESP32, with data pushed to ThingSpeak IoT Cloud and visualized through a Flutter mobile application.
 An optional AI model predicts potential disease risks based on historical health patterns.
 
+---
+
 ## 🎯 Features
 ### 1️⃣ Real Time Monitoring
 - Ambient Temperature
@@ -47,6 +49,8 @@ App refreshes only when new data arrives from ThingSpeak.
 - Multi-cattle support
 - Historical data tracking
 - ThingSpeak API integration
+
+---
 
 ## 🧱 System Architecture
 Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
