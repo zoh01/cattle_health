@@ -53,7 +53,7 @@ App refreshes only when new data arrives from ThingSpeak.
 ---
 
 ## 🧱 System Architecture
-Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
+**Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine**
 
 ### 🛠️ Hardware Used
 - DHT11 – Ambient Temp & Humidity
@@ -79,3 +79,65 @@ Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
 - Random Forest / Decision Tree
 - SHAP or LIME explanation
 - Exported as JSON for use in Flutter
+
+---
+
+## 📱 Flutter App Features in Detail
+### Dashboard
+- Live sensor values
+- Previous data comparison
+- Trend arrows
+- Health status card
+
+### Alerts Page
+- All recent alerts
+- Severity levels
+- Timestamped logs
+
+ ### AI Prediction Page
+- Disease risk score
+- Visual explanation
+- Suggestions for farmers
+
+ ---
+
+ ### ⚙️ ESP32 Firmware Workflow
+ - Collect sensor readings every 60 seconds
+ - Format data into ThingSpeak fields
+ - Send values using HTTP POST
+ - Retry automatically if WiFi drops
+
+--- 
+
+### 🧪 Testing
+- Sensor calibration & accuracy checks
+- WiFi stability tests
+- App performance tests
+- API stress testing
+- Offline/low-network tests
+  
+--- 
+
+### 🌍 Impact
+This system helps farmers:
+- Detect diseases early
+- Reduce cattle mortality
+- Lower veterinary expenses
+- Improve milk & meat productivity
+- Reduce stress through automation
+- Support large-scale farm management
+
+---
+
+## 📡 ThingSpeak Data Fields
+
+| Field | Data                 |
+|-------|----------------------|
+| 1     | Ambient Temperature  |
+| 2     | Humidity             |
+| 3     | Body Temperature     |
+| 4     | Pulse Rate           |
+| 5     | Air Quality          |
+| 6     | (Optional) Gas Level |
+
+
