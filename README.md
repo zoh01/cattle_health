@@ -53,7 +53,9 @@ App refreshes only when new data arrives from ThingSpeak.
 ---
 
 ## 🧱 System Architecture
-**Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine**
+1. Data flow
+   ```bash
+   **Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine**
 
 ### 🛠️ Hardware Used
 - DHT11 – Ambient Temp & Humidity
@@ -131,13 +133,142 @@ This system helps farmers:
 
 ## 📡 ThingSpeak Data Fields
 
-| Field | Data                 |
-|-------|----------------------|
-| 1     | Ambient Temperature  |
-| 2     | Humidity             |
-| 3     | Body Temperature     |
-| 4     | Pulse Rate           |
-| 5     | Air Quality          |
-| 6     | (Optional) Gas Level |
+| Field | Parameter            | Unit  | Description                                      |
+|-------|-----------------------|-------|--------------------------------------------------|
+| 1     | 🌡️ Ambient Temperature | °C    | Measures the surrounding environmental temperature. |
+| 2     | 💧 Humidity            | %     | Measures moisture level around the cattle.          |
+| 3     | 🌡️ Body Temperature    | °C    | Tracks the internal temperature of the cattle.      |
+| 4     | ❤️ Pulse Rate          | bpm   | Monitors the cattle's heart rate.                   |
+| 5     | 🫁 Air Quality         | AQI   | Detects harmful gases around the cattle.            |
+| 6     | 🧪 Gas Level (Optional)| ppm   | Additional gas measurement depending on sensor used. |
+
+---
+
+## 🚦 Future Improvements
+- LoRaWAN support for long-range farms
+- GPS tracking for cattle movement
+- Solar-powered IoT hardware
+- Camera module + image-based disease detection
+- Farmer web dashboard
+
+ ---
+
+ ## 📱 App & Device Preview
+ 
+### Complete System
+![Complete_System](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health7.jpeg)
+
+### App Dashboard
+![App_Dashboard](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health4.jpeg)
+
+### AI Disease Predictions
+![AI_Disease_Predictions](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health2.jpeg)
+
+### ThingSpeak Cloud Dashboard
+![AI_Disease_Predictions](https://github.com/zoh01/cattle_health/blob/8708ab3a05895a7cb60b6f5090f81031c5566f71/thingspeak.jpeg)
+
+### Trend Comparison System
+![Trend_Comparison](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health4.jpeg)
+
+### Data Flow
+![Complete_System](https://github.com/zoh01/cattle_health/blob/9837d58b89c2595ff0a979c683179cf9f8ab0114/flow_data.png)
+
+### IoT Hardware Setup
+![Complete_System](https://github.com/zoh01/cattle_health/blob/3a20d45b6b6c5d58b1bcca50eeb8d13fd8265d7a/health6.jpeg)
 
 
+---
+
+## 🚀 How To Run the Project
+Follow the steps below to set up and run the IoT Cattle Health Monitoring System mobile app and IoT hardware.
+📱 **1. Run the Flutter Mobile App**
+- Flutter SDK (3.x recommended)
+- Android Studio / VS Code
+- Dart SDK
+- Android Emulator or Physical Device
+- Git
+
+**Steps To Run**
+1. Clone the repository:
+   ```bash
+   git clone <https://github.com/zoh01/cattle_health>
+2. Enter project folder
+   ```bash
+   cd cattle-health-monitoring  
+3. Get dependencies
+   ```bash
+   flutter pub get
+4. Run the app
+   ```bash
+   flutter run
+
+ 🔌 **2. Setup the IoT Hardware (ESP32 + Sensors)**
+ **Required Components**
+ - ESP32
+ - DHT11 Sensor (Ambient Temp & Humidity)
+ - MQ-x Gas / Air Quality Sensor
+ - DS18B20 Temperature Sensor (Body Temp)
+ - Pulse Sensor
+ - Jumper wires, breadboard & power supply
+
+ **Steps**
+ **1.** Open the Arduino IDE or PlatformIO.
+ **2.** Install required ESP32 board packages & sensor libraries.
+ **3.** Open the provided esp32_code.ino file from the /iot/ folder.
+**4.** Replace the placeholder values with your actual details:
+**Steps**
+1. ThingSpeak & WiFi Configuration
+   ```bash
+   const char* apiKey = "YOUR_THINGSPEAK_API_KEY";
+   const char* wifiSSID = "YOUR_WIFI_SSID";
+   const char* wifiPassword = "YOUR_WIFI_PASSWORD";
+
+**4.** Upload the code to the ESP32.
+**5.** Sensors will now continuously publish data to **ThingSpeak Cloud**.
+
+☁️ **3. Configure ThingSpeak Cloud**
+**Steps**
+**1.** Create a ThingSpeak account
+**2.** Create a new channel
+**3.** Add fields 1–6:
+- Ambient Temperature
+- Humidity
+- Body Temperature
+- Pulse Rate
+- Air Quality
+- Gas Level
+**4.** Copy
+- **Channel ID**
+- **Read API Key**
+- **Write API Key**
+**5.** Insert these keys into:
+- Flutter app → api_service.dart
+- ESP32 code → POST requests
+
+📡 **4. Connect App to ThingSpeak Data**
+1. The app automatically fetches data from ThingSpeak API:
+   ```bash
+   https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
+This populates the dashboard with:
+- Latest Value
+- Previous Value
+- Trend arrows
+- Color-coded status
+- Disease prediction
+
+✔️ **5. Everything is Ready!**
+- Your ESP32 sends data → ThingSpeak
+- The Flutter App fetches data → displays real-time health insights
+- Disease prediction runs on-device
+- Notifications trigger on abnormal values
+ 
+---
+
+### 👤 **Author / Contact** section  
+
+## 👤 Author
+**Adebayo Wariz / zoh01**  
+Email: adebayozoh@gmail.com
+Whatsapp: +234 702 513 6608
+LinkedIn: https://www.linkedin.com/in/adebayo-wariz-a8ab9a310/
+GitHub: [https://github.com/zoh01](https://github.com/zoh01)
