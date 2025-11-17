@@ -85,18 +85,18 @@ App refreshes only when new data arrives from ThingSpeak.
 ---
 
 ## 📱 Flutter App Features in Detail
-### Dashboard
+### 📡 Dashboard
 - Live sensor values
 - Previous data comparison
 - Trend arrows
 - Health status card
 
-### Alerts Page
+### 🔔 Alerts Page
 - All recent alerts
 - Severity levels
 - Timestamped logs
 
- ### AI Prediction Page
+ ### 🤖 AI Prediction Page
 - Disease risk score
 - Visual explanation
 - Suggestions for farmers
@@ -165,16 +165,16 @@ This system helps farmers:
 ![AI_Disease_Predictions](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health2.jpeg)
 
 ### ThingSpeak Cloud Dashboard
-![AI_Disease_Predictions](https://github.com/zoh01/cattle_health/blob/8708ab3a05895a7cb60b6f5090f81031c5566f71/thingspeak.jpeg)
+![ThingSpeak_Cloud_Dashboard](https://github.com/zoh01/cattle_health/blob/8708ab3a05895a7cb60b6f5090f81031c5566f71/thingspeak.jpeg)
 
 ### Trend Comparison System
 ![Trend_Comparison](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health4.jpeg)
 
 ### Data Flow
-![Complete_System](https://github.com/zoh01/cattle_health/blob/9837d58b89c2595ff0a979c683179cf9f8ab0114/flow_data.png)
+![Data_Flow](https://github.com/zoh01/cattle_health/blob/9837d58b89c2595ff0a979c683179cf9f8ab0114/flow_data.png)
 
 ### IoT Hardware Setup
-![Complete_System](https://github.com/zoh01/cattle_health/blob/3a20d45b6b6c5d58b1bcca50eeb8d13fd8265d7a/health6.jpeg)
+![IoT_Hardware_Setup](https://github.com/zoh01/cattle_health/blob/3a20d45b6b6c5d58b1bcca50eeb8d13fd8265d7a/health6.jpeg)
 
 
 ---
@@ -249,14 +249,14 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 1. The app automatically fetches data from ThingSpeak API:
    ```bash
    https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
-This populates the dashboard with:
+**This populates the dashboard with:**
 - Latest Value
 - Previous Value
 - Trend arrows
 - Color-coded status
 - Disease prediction
 
-✔️ **5. Everything is Ready!**
+✅ **5. Everything is Ready!**
 - Your ESP32 sends data → ThingSpeak
 - The Flutter App fetches data → displays real-time health insights
 - Disease prediction runs on-device
@@ -264,11 +264,18 @@ This populates the dashboard with:
  
 ---
 
-### 👤 **Author / Contact** section  
+###  **Author / Contact** section  
 
 ## 👤 Author
-**Adebayo Wariz / zoh01**  
-Email: adebayozoh@gmail.com
+**Adebayo Wariz**  
+
+## 📧 Contact
 Whatsapp: +234 702 513 6608
+Email: adebayozoh@gmail.com
 LinkedIn: https://www.linkedin.com/in/adebayo-wariz-a8ab9a310/
 GitHub: [https://github.com/zoh01](https://github.com/zoh01)
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
