@@ -55,7 +55,7 @@ App refreshes only when new data arrives from ThingSpeak.
 ## 🧱 System Architecture
 1. Data flow
    ```bash
-   **Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine**
+   Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
 
 ### 🛠️ Hardware Used
 - DHT11 – Ambient Temp & Humidity
@@ -181,14 +181,14 @@ This system helps farmers:
 
 ## 🚀 How To Run the Project
 Follow the steps below to set up and run the IoT Cattle Health Monitoring System mobile app and IoT hardware.
-📱 **1. Run the Flutter Mobile App**
+## 📱 1. Run the Flutter Mobile App
 - Flutter SDK (3.x recommended)
 - Android Studio / VS Code
 - Dart SDK
 - Android Emulator or Physical Device
 - Git
 
-**Steps To Run**
+**STEPS TO RUN**
 1. Clone the repository:
    ```bash
    git clone <https://github.com/zoh01/cattle_health>
@@ -202,7 +202,7 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
    ```bash
    flutter run
 
- 🔌 **2. Setup the IoT Hardware (ESP32 + Sensors)**
+ ## 🔌 2. Setup the IoT Hardware (ESP32 + Sensors)
  **Required Components**
  - ESP32
  - DHT11 Sensor (Ambient Temp & Humidity)
@@ -211,41 +211,53 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
  - Pulse Sensor
  - Jumper wires, breadboard & power supply
 
- **Steps**
- **1.** Open the Arduino IDE or PlatformIO.
- **2.** Install required ESP32 board packages & sensor libraries.
- **3.** Open the provided esp32_code.ino file from the /iot/ folder.
-**4.** Replace the placeholder values with your actual details:
-**Steps**
+ **STEPS**
+ 
+ **1. Open the Arduino IDE or PlatformIO.**
+ 
+ **2. Install required ESP32 board packages & sensor libraries.**
+
+ **3. Open the provided esp32_code.ino file from the /iot/ folder.**
+
+**4. Replace the placeholder values with your actual details:**
+
+**STEPS**
 1. ThingSpeak & WiFi Configuration
    ```bash
    const char* apiKey = "YOUR_THINGSPEAK_API_KEY";
    const char* wifiSSID = "YOUR_WIFI_SSID";
    const char* wifiPassword = "YOUR_WIFI_PASSWORD";
 
-**4.** Upload the code to the ESP32.
-**5.** Sensors will now continuously publish data to **ThingSpeak Cloud**.
+**5.** Upload the code to the ESP32.
 
-☁️ **3. Configure ThingSpeak Cloud**
-**Steps**
-**1.** Create a ThingSpeak account
-**2.** Create a new channel
-**3.** Add fields 1–6:
+**6.** Sensors will now continuously publish data to **ThingSpeak Cloud**.
+
+## ☁️ 3. Configure ThingSpeak Cloud
+
+**STEPS**
+
+**1. Create a ThingSpeak account**
+
+**2. Create a new channel**
+
+**3. Add fields 1–6:**
 - Ambient Temperature
 - Humidity
 - Body Temperature
 - Pulse Rate
 - Air Quality
 - Gas Level
-**4.** Copy
+
+**4. Copy**
 - **Channel ID**
 - **Read API Key**
 - **Write API Key**
-**5.** Insert these keys into:
+  
+**5. Insert these keys into:**
 - Flutter app → api_service.dart
 - ESP32 code → POST requests
 
-📡 **4. Connect App to ThingSpeak Data**
+## 📡 4. Connect App to ThingSpeak Data
 1. The app automatically fetches data from ThingSpeak API:
    ```bash
    https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
