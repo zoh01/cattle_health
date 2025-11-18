@@ -20,7 +20,7 @@ An optional AI model predicts potential disease risks based on historical health
 - Heart Rate
 - Air Quality (MQ-x Gas Sensor)
 
-### 2️⃣ Smart Trent Indicators
+### 2️⃣ Smart Trend Indicators
 Compares latest vs. previous readings and shows:
 - 🟢 **Upward Arror** → Improving
 - 🔴 **Downward Arrow** → Declining
@@ -168,7 +168,7 @@ This system helps farmers:
 ![ThingSpeak_Cloud_Dashboard](https://github.com/zoh01/cattle_health/blob/8708ab3a05895a7cb60b6f5090f81031c5566f71/thingspeak.jpeg)
 
 ### Trend Comparison System
-![Trend_Comparison](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health4.jpeg)
+![Trend_Comparison](https://github.com/zoh01/cattle_health/blob/9372e26e2bf2a7e27c19f4da25e1b85a4604d60a/health1.jpeg)
 
 ### Data Flow
 ![Data_Flow](https://github.com/zoh01/cattle_health/blob/9837d58b89c2595ff0a979c683179cf9f8ab0114/flow_data.png)
