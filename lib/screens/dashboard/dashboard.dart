@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:cattle_health/screens/dashboard/widgets/health_score_card.dart';
 import 'package:cattle_health/utils/constants/image_string.dart';
 import 'package:cattle_health/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import '../../models/shimmer/shimmer_loader.dart';
 import '../../services/api_data.dart';
 
 import '../dashboard/widgets/value_card.dart';
@@ -209,9 +211,48 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     return null;
   }
 
-
   @override
   Widget build(BuildContext context) {
+
+    if (field1 == null ||
+        field2 == null ||
+        field3 == null ||
+        field4 == null ||
+        field5 == null) {
+      return Scaffold(
+        backgroundColor: Colors.white54,
+        appBar: AppBar(
+          title: const Text(
+            "Cattle Health Monitor",
+            style: TextStyle(
+              fontFamily: "Roboto",
+              fontSize: ZohSizes.defaultSpace,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white12,
+          elevation: 5,
+        ),
+        body: SingleChildScrollView(
+          child: const Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                ShimmerLoader(height: 150),
+                ShimmerLoader(height: 150),
+                ShimmerLoader(height: 150),
+                ShimmerLoader(height: 150),
+                ShimmerLoader(height: 150),
+                SizedBox(height: 20),
+                ShimmerLoader(height: 150), // For HealthScoreCard
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     final healthStatus = detectCattleHealth();
 
     return Scaffold(
@@ -234,17 +275,65 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
           padding: const EdgeInsets.all(ZohSizes.md),
           child: Column(
             children: [
-              ValueCard(image: ZohImages.ambientTemp, title: "Ambient Temp", value: field1, prevValue: prevField1, unit: "°C", validator: isAmbientTempOK, diseasePredictor: getFieldDisease,),
+              ValueCard(
+                image: ZohImages.ambientTemp,
+                title: "Ambient Temp",
+                value: field1,
+                prevValue: prevField1,
+                unit: "°C",
+                validator: isAmbientTempOK,
+                diseasePredictor: getFieldDisease,
+              ),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.humidity, title: "Humidity", value: field2, prevValue: prevField2, unit: "%", validator: isHumidityOK, diseasePredictor: getFieldDisease,),
+              ValueCard(
+                image: ZohImages.humidity,
+                title: "Humidity",
+                value: field2,
+                prevValue: prevField2,
+                unit: "%",
+                validator: isHumidityOK,
+                diseasePredictor: getFieldDisease,
+              ),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.heartRate, title: "Heart Rate", value: field3, prevValue: prevField3, unit: "bpm", validator: isHeartRateOK, diseasePredictor: getFieldDisease,),
+              ValueCard(
+                image: ZohImages.heartRate,
+                title: "Heart Rate",
+                value: field3,
+                prevValue: prevField3,
+                unit: "bpm",
+                validator: isHeartRateOK,
+                diseasePredictor: getFieldDisease,
+              ),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.temp, title: "Body Temp", value: field4, prevValue: prevField4, unit: "°C", validator: isBodyTempOK, diseasePredictor: getFieldDisease,),
+              ValueCard(
+                image: ZohImages.temp,
+                title: "Body Temp",
+                value: field4,
+                prevValue: prevField4,
+                unit: "°C",
+                validator: isBodyTempOK,
+                diseasePredictor: getFieldDisease,
+              ),
               const SizedBox(height: 12),
-              ValueCard(image: ZohImages.airQuality, title: "Air Quality", value: field5, prevValue: prevField5, unit: "AQI", validator: isAirQualityOK, diseasePredictor: getFieldDisease,),
+              ValueCard(
+                image: ZohImages.airQuality,
+                title: "Air Quality",
+                value: field5,
+                prevValue: prevField5,
+                unit: "AQI",
+                validator: isAirQualityOK,
+                diseasePredictor: getFieldDisease,
+              ),
               SizedBox(height: ZohSizes.md),
               Divider(),
+              SizedBox(height: ZohSizes.md),
+              HealthScoreCard(
+                ambient: double.parse(field1!),
+                humidity: double.parse(field2!),
+                bodyTemp: double.parse(field3!),
+                pulse: double.parse(field4!),
+                airQuality: double.parse(field5!),
+              ),
               SizedBox(height: ZohSizes.md),
               HealthCard(status: healthStatus),
               const SizedBox(height: 20),

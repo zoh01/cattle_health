@@ -82,22 +82,11 @@ class _ValueCardState extends State<ValueCard> {
       }
     }
 
-    return shimmer
-        ? Shimmer.fromColors(
-          baseColor: Colors.white70,
-          highlightColor: Colors.transparent,
-          child: FieldCard(
-            bgColor: bgColor,
-            widget: widget,
-            difference: difference,
-            diseasePrediction: diseasePrediction,
-          ),
-        )
-        : FieldCard(
-          bgColor: bgColor,
-          widget: widget,
-          difference: difference,
-          diseasePrediction: diseasePrediction,
-        );
+    return FieldCard(
+      bgColor: bgColor,
+      widget: widget,
+      difference: difference,
+      diseasePrediction: diseasePrediction,
+    );
   }
 }
