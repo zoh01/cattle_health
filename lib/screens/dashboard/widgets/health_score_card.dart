@@ -1,4 +1,3 @@
-import 'package:cattle_health/utils/constants/colors.dart';
 import 'package:cattle_health/utils/constants/image_string.dart';
 import 'package:cattle_health/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +40,7 @@ class HealthScoreCard extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            color.withOpacity(0.9),
-            color,
-          ],
+          colors: [color.withOpacity(0.9), color],
         ),
         boxShadow: [
           BoxShadow(
@@ -146,7 +142,10 @@ class HealthScoreCard extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 8, left: 4),
+                              padding: const EdgeInsets.only(
+                                bottom: 8,
+                                left: 4,
+                              ),
                               child: Text(
                                 "%",
                                 style: TextStyle(
