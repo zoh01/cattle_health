@@ -195,11 +195,11 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
    
             cd cattle-health-monitoring  
 3. Get dependencies
-   ```bash
-   flutter pub get
-4. Run the app
-   ```bash
-   flutter run
+   
+            flutter pub get
+5. Run the app
+   
+            flutter run
 
  ## 🔌 2. Setup the IoT Hardware (ESP32 + Sensors)
  **Required Components**
