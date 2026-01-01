@@ -53,9 +53,8 @@ App refreshes only when new data arrives from ThingSpeak.
 ---
 
 ## 🧱 System Architecture
-1. Data flow
-   ```bash
-   Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
+### Data flow
+         Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
 
 ### 🛠️ Hardware Used
 - DHT11 – Ambient Temp & Humidity
