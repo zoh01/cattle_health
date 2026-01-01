@@ -132,14 +132,14 @@ This system helps farmers:
 
 ## 📡 ThingSpeak Data Fields
 
-| Field | Parameter            | Unit  | Description                                      |
-|-------|-----------------------|-------|--------------------------------------------------|
-| 1     | 🌡️ Ambient Temperature | °C    | Measures the surrounding environmental temperature. |
-| 2     | 💧 Humidity            | %     | Measures moisture level around the cattle.          |
-| 3     | 🌡️ Body Temperature    | °C    | Tracks the internal temperature of the cattle.      |
-| 4     | ❤️ Pulse Rate          | bpm   | Monitors the cattle's heart rate.                   |
-| 5     | 🫁 Air Quality         | AQI   | Detects harmful gases around the cattle.            |
-| 6     | 🧪 Gas Level (Optional)| ppm   | Additional gas measurement depending on sensor used. |
+         | Field | Parameter            | Unit  | Description                                      |
+         |-------|-----------------------|-------|--------------------------------------------------|
+         | 1     | 🌡️ Ambient Temperature | °C    | Measures the surrounding environmental temperature. |
+         | 2     | 💧 Humidity            | %     | Measures moisture level around the cattle.          |
+         | 3     | 🌡️ Body Temperature    | °C    | Tracks the internal temperature of the cattle.      |
+         | 4     | ❤️ Pulse Rate          | bpm   | Monitors the cattle's heart rate.                   |
+         | 5     | 🫁 Air Quality         | AQI   | Detects harmful gases around the cattle.            |
+         | 6     | 🧪 Gas Level (Optional)| ppm   | Additional gas measurement depending on sensor used. |
 
 ---
 
