@@ -221,11 +221,11 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 **4. Replace the placeholder values with your actual details:**
 
 **STEPS**
-1. ThingSpeak & WiFi Configuration
-   ```bash
-   const char* apiKey = "YOUR_THINGSPEAK_API_KEY";
-   const char* wifiSSID = "YOUR_WIFI_SSID";
-   const char* wifiPassword = "YOUR_WIFI_PASSWORD";
+ThingSpeak & WiFi Configuration
+   
+         const char* apiKey = "YOUR_THINGSPEAK_API_KEY";
+         const char* wifiSSID = "YOUR_WIFI_SSID";
+         const char* wifiPassword = "YOUR_WIFI_PASSWORD";
 
 **5.** Upload the code to the ESP32.
 
