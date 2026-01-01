@@ -189,11 +189,11 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 
 **STEPS TO RUN**
 1. Clone the repository:
-   ```bash
-   git clone <https://github.com/zoh01/cattle_health>
+   
+            git clone <https://github.com/zoh01/cattle_health>
 2. Enter project folder
-   ```bash
-   cd cattle-health-monitoring  
+   
+            cd cattle-health-monitoring  
 3. Get dependencies
    ```bash
    flutter pub get
