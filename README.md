@@ -180,7 +180,7 @@ This system helps farmers:
 
 ## 🚀 How To Run the Project
 Follow the steps below to set up and run the IoT Cattle Health Monitoring System mobile app and IoT hardware.
-## 📱 1. Run the Flutter Mobile App
+### 📱 1. Run the Flutter Mobile App
 - Flutter SDK (3.x recommended)
 - Android Studio / VS Code
 - Dart SDK
@@ -201,7 +201,7 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
    
             flutter run
 
- ## 🔌 2. Setup the IoT Hardware (ESP32 + Sensors)
+ ### 🔌 2. Setup the IoT Hardware (ESP32 + Sensors)
  **Required Components**
  - ESP32
  - DHT11 Sensor (Ambient Temp & Humidity)
@@ -231,7 +231,7 @@ ThingSpeak & WiFi Configuration
 
 **6.** Sensors will now continuously publish data to **ThingSpeak Cloud**.
 
-## ☁️ 3. Configure ThingSpeak Cloud
+### ☁️ 3. Configure ThingSpeak Cloud
 
 **STEPS**
 
@@ -256,7 +256,7 @@ ThingSpeak & WiFi Configuration
 - Flutter app → api_service.dart
 - ESP32 code → POST requests
 
-## 📡 4. Connect App to ThingSpeak Data
+### 📡 4. Connect App to ThingSpeak Data
 1. The app automatically fetches data from ThingSpeak API:
    ```bash
    https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
