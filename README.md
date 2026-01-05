@@ -253,7 +253,7 @@ ThingSpeak & WiFi Configuration
 - **Write API Key**
   
 **5. Insert these keys into:**
-- Flutter app → api_service.dart
+- `Flutter app → api_service.dart`
 - ESP32 code → POST requests
 
 ### 4. 📡 Connect App to ThingSpeak Data
