@@ -275,8 +275,6 @@ ThingSpeak & WiFi Configuration
  
 ---
 
-## 👤 **Author / Contact** section  
-
 ## 👤 Author
 **Adebayo Wariz**  
 
