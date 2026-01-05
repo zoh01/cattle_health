@@ -301,3 +301,13 @@ This project is licensed under the MIT License - see [LICENSE](#-LICENSE) file.
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
     in the Software without restriction...
+
+---
+
+<div align="center">
+
+### Built with ❤️ using Flutter
+⭐ Star this repo if you find it helpful!
+
+</div>
+
