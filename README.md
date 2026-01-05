@@ -254,10 +254,10 @@ ThingSpeak & WiFi Configuration
   
 **5. Insert these keys into:**
 - `Flutter app → api_service.dart`
-- ESP32 code → POST requests
+- `ESP32 code → POST requests`
 
 ### 4. 📡 Connect App to ThingSpeak Data
-1. The app automatically fetches data from ThingSpeak API:
+The app automatically fetches data from ThingSpeak API:
    
             https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
 **This populates the dashboard with:**
