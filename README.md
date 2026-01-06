@@ -201,7 +201,7 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
    
             flutter run
 
- ### 2. 🔌 Setup the IoT Hardware (ESP32 + Sensors)
+ ### 2. 🔌 Setup the IoT Hardware (ESP32 & Sensors)
  **Required Components**
  - ESP32
  - DHT11 Sensor (Ambient Temp & Humidity)
