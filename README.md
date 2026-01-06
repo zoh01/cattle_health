@@ -147,7 +147,7 @@ This system helps farmers:
 - LoRaWAN support for long-range farms
 - GPS tracking for cattle movement
 - Solar-powered IoT hardware
-- Camera module + image-based disease detection
+- Camera module & image-based disease detection
 - Farmer web dashboard
 
  ---
