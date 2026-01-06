@@ -76,7 +76,7 @@ App refreshes only when new data arrives from ThingSpeak.
 - SharedPreferences for offline use
 
 ### 🧠 AI Model
-- Python (scikit-learn)
+- Python
 - Random Forest / Decision Tree
 - SHAP or LIME explanation
 - Exported as JSON for use in Flutter
