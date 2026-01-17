@@ -53,9 +53,8 @@ App refreshes only when new data arrives from ThingSpeak.
 ---
 
 ## 🧱 System Architecture
-1. Data flow
-   ```bash
-   Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
+### Data flow
+         Sensors → ESP32 → ThingSpeak Cloud → Flutter App → AI Risk Engine
 
 ### 🛠️ Hardware Used
 - DHT11 – Ambient Temp & Humidity
@@ -77,7 +76,7 @@ App refreshes only when new data arrives from ThingSpeak.
 - SharedPreferences for offline use
 
 ### 🧠 AI Model
-- Python (scikit-learn)
+- Python
 - Random Forest / Decision Tree
 - SHAP or LIME explanation
 - Exported as JSON for use in Flutter
@@ -133,14 +132,14 @@ This system helps farmers:
 
 ## 📡 ThingSpeak Data Fields
 
-| Field | Parameter            | Unit  | Description                                      |
-|-------|-----------------------|-------|--------------------------------------------------|
-| 1     | 🌡️ Ambient Temperature | °C    | Measures the surrounding environmental temperature. |
-| 2     | 💧 Humidity            | %     | Measures moisture level around the cattle.          |
-| 3     | 🌡️ Body Temperature    | °C    | Tracks the internal temperature of the cattle.      |
-| 4     | ❤️ Pulse Rate          | bpm   | Monitors the cattle's heart rate.                   |
-| 5     | 🫁 Air Quality         | AQI   | Detects harmful gases around the cattle.            |
-| 6     | 🧪 Gas Level (Optional)| ppm   | Additional gas measurement depending on sensor used. |
+         | Field | Parameter            | Unit  | Description                                      |
+         |-------|-----------------------|-------|--------------------------------------------------|
+         | 1     | 🌡️ Ambient Temperature | °C    | Measures the surrounding environmental temperature. |
+         | 2     | 💧 Humidity            | %     | Measures moisture level around the cattle.          |
+         | 3     | 🌡️ Body Temperature    | °C    | Tracks the internal temperature of the cattle.      |
+         | 4     | ❤️ Pulse Rate          | bpm   | Monitors the cattle's heart rate.                   |
+         | 5     | 🫁 Air Quality         | AQI   | Detects harmful gases around the cattle.            |
+         | 6     | 🧪 Gas Level (Optional)| ppm   | Additional gas measurement depending on sensor used. |
 
 ---
 
@@ -148,7 +147,7 @@ This system helps farmers:
 - LoRaWAN support for long-range farms
 - GPS tracking for cattle movement
 - Solar-powered IoT hardware
-- Camera module + image-based disease detection
+- Camera module & image-based disease detection
 - Farmer web dashboard
 
  ---
@@ -181,7 +180,7 @@ This system helps farmers:
 
 ## 🚀 How To Run the Project
 Follow the steps below to set up and run the IoT Cattle Health Monitoring System mobile app and IoT hardware.
-## 📱 1. Run the Flutter Mobile App
+### 1. 📱 Run the Flutter Mobile App
 - Flutter SDK (3.x recommended)
 - Android Studio / VS Code
 - Dart SDK
@@ -190,19 +189,19 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 
 **STEPS TO RUN**
 1. Clone the repository:
-   ```bash
-   git clone <https://github.com/zoh01/cattle_health>
+   
+            git clone <https://github.com/zoh01/cattle_health>
 2. Enter project folder
-   ```bash
-   cd cattle-health-monitoring  
+   
+            cd cattle-health-monitoring  
 3. Get dependencies
-   ```bash
-   flutter pub get
-4. Run the app
-   ```bash
-   flutter run
+   
+            flutter pub get
+5. Run the app
+   
+            flutter run
 
- ## 🔌 2. Setup the IoT Hardware (ESP32 + Sensors)
+ ### 2. 🔌 Setup the IoT Hardware (ESP32 & Sensors)
  **Required Components**
  - ESP32
  - DHT11 Sensor (Ambient Temp & Humidity)
@@ -222,17 +221,17 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 **4. Replace the placeholder values with your actual details:**
 
 **STEPS**
-1. ThingSpeak & WiFi Configuration
-   ```bash
-   const char* apiKey = "YOUR_THINGSPEAK_API_KEY";
-   const char* wifiSSID = "YOUR_WIFI_SSID";
-   const char* wifiPassword = "YOUR_WIFI_PASSWORD";
+ThingSpeak & WiFi Configuration
+   
+         const char* apiKey = "YOUR_THINGSPEAK_API_KEY";
+         const char* wifiSSID = "YOUR_WIFI_SSID";
+         const char* wifiPassword = "YOUR_WIFI_PASSWORD";
 
 **5.** Upload the code to the ESP32.
 
 **6.** Sensors will now continuously publish data to **ThingSpeak Cloud**.
 
-## ☁️ 3. Configure ThingSpeak Cloud
+### 3. ☁️ Configure ThingSpeak Cloud
 
 **STEPS**
 
@@ -254,13 +253,13 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 - **Write API Key**
   
 **5. Insert these keys into:**
-- Flutter app → api_service.dart
-- ESP32 code → POST requests
+- `Flutter app → api_service.dart`
+- `ESP32 code → POST requests`
 
-## 📡 4. Connect App to ThingSpeak Data
-1. The app automatically fetches data from ThingSpeak API:
-   ```bash
-   https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
+### 4. 📡 Connect App to ThingSpeak Data
+The app automatically fetches data from ThingSpeak API:
+   
+            https://api.thingspeak.com/channels/YOUR_CHANNEL_ID/feeds.json?results=1
 **This populates the dashboard with:**
 - Latest Value
 - Previous Value
@@ -275,8 +274,6 @@ Follow the steps below to set up and run the IoT Cattle Health Monitoring System
 - Notifications trigger on abnormal values
  
 ---
-
-## 👤 **Author / Contact** section  
 
 ## 👤 Author
 **Adebayo Wariz**  
@@ -293,4 +290,22 @@ GitHub: [https://github.com/zoh01](https://github.com/zoh01)
 ---
 
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see [LICENSE](#-LICENSE) file.
+
+    MIT License
+    
+    Copyright (c) 2026 [Adebayo Wariz]
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction...
+
+---
+
+<div align="center">
+
+### Built with ❤️ using Flutter
+⭐ Star this repo if you find it helpful!
+
+</div>
+
