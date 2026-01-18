@@ -12,21 +12,44 @@ class DiseaseCard extends StatefulWidget {
   @override
   State<DiseaseCard> createState() => _DiseaseCardState();
 
-  // ✅ Helper method belongs to the widget
-  DiseaseExplanation getExplanation() {
-    return diseaseInfo.entries.firstWhere(
-          (entry) => disease.contains(entry.key),
-      orElse: () => MapEntry(
-        "Unknown",
-        DiseaseExplanation(
-          title: "Unknown Condition",
-          cause: "Insufficient data to determine the cause.",
-          advice: "Continue monitoring sensor readings and consult a veterinarian.",
-        ),
-      ),
-    ).value;
+  List<String> extractDiseases(String prediction) {
+    if (!prediction.startsWith("Possible Disease")) {
+      return [];
+    }
+
+    return prediction
+        .replaceFirst("Possible Disease(s):", "")
+        .split(",")
+        .map((e) => e.trim())
+        .toList();
   }
+
+  /// Disease Explanation
+  List<DiseaseExplanation> getExplanationsFromPrediction(String prediction) {
+    final diseases = extractDiseases(prediction);
+    List<DiseaseExplanation> results = [];
+
+    for (final disease in diseases) {
+      if (diseaseInfo.containsKey(disease)) {
+        results.add(diseaseInfo[disease]!);
+      }
+    }
+
+    if (results.isEmpty) {
+      results.add(
+        DiseaseExplanation(
+          title: "Normal Condition",
+          cause: "All vital signs are within healthy ranges.",
+          advice: "Continue routine monitoring.",
+        ),
+      );
+    }
+
+    return results;
+  }
+
 }
+
 
 class _DiseaseCardState extends State<DiseaseCard> {
   bool shimmer = true;
@@ -48,8 +71,7 @@ class _DiseaseCardState extends State<DiseaseCard> {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ Get explanation safely here
-    final explanation = widget.getExplanation();
+    final explanations = widget.getExplanationsFromPrediction(widget.disease);
 
     Color bgColor = Colors.blue.shade300;
     String diseaseImage = ZohImages.healing;
@@ -157,17 +179,23 @@ class _DiseaseCardState extends State<DiseaseCard> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    explanation.cause,
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.85),
-                      fontSize: 14,
+
+                  ...explanations.map(
+                        (exp) => Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        "• ${exp.cause}",
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.85),
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
 
+                  // Recommendation
                   const SizedBox(height: 6),
 
-                  // Recommendation
                   Text(
                     "Recommendation:",
                     style: TextStyle(
@@ -175,13 +203,20 @@ class _DiseaseCardState extends State<DiseaseCard> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    explanation.advice,
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.85),
-                      fontSize: 14,
+
+                  ...explanations.map(
+                        (exp) => Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        "• ${exp.advice}",
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.85),
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
+
                 ],
               ),
             ),

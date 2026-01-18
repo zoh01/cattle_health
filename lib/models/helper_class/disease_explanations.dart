@@ -11,33 +11,40 @@ class DiseaseExplanation {
 }
 
 final Map<String, DiseaseExplanation> diseaseInfo = {
-  "No specific disease": DiseaseExplanation(
-    title: "Healthy Crop",
-    cause: "Environmental and soil conditions are within safe ranges.",
-    advice: "Continue regular monitoring and good farm practices.",
+  "Heat Stress": DiseaseExplanation(
+    title: "Heat Stress",
+    cause: "Elevated body temperature and heart rate caused by excessive environmental heat.",
+    advice: "Move cattle to shade, provide clean water, and reduce physical activity.",
   ),
 
-  "Possible Leaf Blight": DiseaseExplanation(
-    title: "Leaf Blight",
-    cause:
-    "Often caused by excessive moisture, fungal infection, or poor air circulation.",
-    advice:
-    "Reduce irrigation, improve spacing between plants, and apply recommended fungicides.",
+  "Hypothermia": DiseaseExplanation(
+    title: "Hypothermia",
+    cause: "Low body temperature and reduced heart rate due to cold exposure.",
+    advice: "Provide warmth, dry bedding, and shelter from cold winds.",
   ),
 
-  "Possible Root Rot": DiseaseExplanation(
-    title: "Root Rot",
-    cause:
-    "Caused by overwatering, poor drainage, or infected soil fungi.",
-    advice:
-    "Improve soil drainage and avoid excessive watering.",
+  "Ketosis": DiseaseExplanation(
+    title: "Ketosis",
+    cause: "Low body temperature combined with high humidity affecting energy metabolism.",
+    advice: "Improve nutrition and consult a veterinarian for metabolic support.",
   ),
 
-  "Possible Pest Attack": DiseaseExplanation(
-    title: "Pest Infestation",
-    cause:
-    "High temperature and humidity can encourage insect breeding.",
-    advice:
-    "Inspect crops regularly and use approved pest control methods.",
+  "Mastitis": DiseaseExplanation(
+    title: "Mastitis",
+    cause: "High ambient temperature and humidity encouraging bacterial growth.",
+    advice: "Isolate affected cattle and begin veterinary treatment immediately.",
+  ),
+
+  "Shock & Circulatory Collapse": DiseaseExplanation(
+    title: "Shock & Circulatory Collapse",
+    cause: "Low body temperature with abnormally high heart rate indicating stress or trauma.",
+    advice: "Urgent veterinary intervention required.",
+  ),
+
+  "Respiratory Issues": DiseaseExplanation(
+    title: "Respiratory Issues",
+    cause: "Poor air quality combined with increased heart rate stressing the lungs.",
+    advice: "Improve ventilation and remove cattle from polluted environments.",
   ),
 };
+

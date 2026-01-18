@@ -4,6 +4,7 @@ import 'package:cattle_health/screens/dashboard/widgets/health_score_card.dart';
 import 'package:cattle_health/utils/constants/image_string.dart';
 import 'package:cattle_health/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import '../../models/helper_class/disease_explanations.dart';
 import '../../models/shimmer/shimmer_loader.dart';
 import '../../services/api_data.dart';
 
