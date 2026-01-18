@@ -18,6 +18,7 @@ class ZohSpeakScreens extends StatefulWidget {
   State<ZohSpeakScreens> createState() => _ThingSpeakScreenState();
 }
 
+bool _alertShown = false;
 class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
   String? field1, field2, field3, field4, field5; // Current values
   String? prevField1,
@@ -89,6 +90,14 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
       field4 = _formatValue(feed["field4"]);
       field5 = _formatValue(feed["field5"]);
     });
+
+    // 🔔 Trigger alert AFTER state update
+    if (!_alertShown && isCriticalReading()) {
+      _alertShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showCriticalDialog();
+      });
+    }
   }
 
   String? _formatValue(dynamic value) {
@@ -141,6 +150,24 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     }
     if (!airOK) issues.add("Poor Air Quality");
     return "Issues: ${issues.join(', ')}";
+  }
+
+  bool isCriticalReading() {
+    final tempAmb = double.tryParse(field1 ?? "");
+    final humidity = double.tryParse(field2 ?? "");
+    final heart = double.tryParse(field3 ?? "");
+    final tempBody = double.tryParse(field4 ?? "");
+    final airQ = double.tryParse(field5 ?? "");
+
+    if ([tempAmb, humidity, heart, tempBody, airQ].contains(null)) {
+      return false;
+    }
+
+    return !isAmbientTempOK(tempAmb!) ||
+        !isHumidityOK(humidity!) ||
+        !isHeartRateOK(heart!) ||
+        !isBodyTempOK(tempBody!) ||
+        !isAirQualityOK(airQ!);
   }
 
   // Predict possible disease based on abnormal patterns
@@ -344,4 +371,27 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
       ),
     );
   }
+
+  void showCriticalDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: const Text("🚨 Critical Alert"),
+        content: const Text(
+          "Abnormal health readings detected.\nImmediate veterinary attention is required.",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _alertShown = false; // allow future alerts if values worsen again
+            },
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
 }
