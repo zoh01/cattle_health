@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cattle_health/screens/health_monitor/cattle_monitor_screen.dart';
 import 'package:cattle_health/utils/constants/image_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 7)).then((zoh) {
       Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (ctx) => const ZohSpeakScreens()));
+          CupertinoPageRoute(builder: (ctx) => const CattleMonitorScreen()));
     });
     loadData();
   }
