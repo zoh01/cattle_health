@@ -57,31 +57,29 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     _alertShown = true;
 
     // 🔊 Play alert sound
-    await _audioPlayer.play(
-      AssetSource('sounds/alert.mp3'),
-      volume: 1.0,
-    );
+    await _audioPlayer.play(AssetSource('sounds/alert.mp3'), volume: 1.0);
 
     if (!mounted) return;
 
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AlertDialog(
-        title: const Text("🚨 Critical Alert"),
-        content: const Text(
-          "Abnormal cattle health readings detected.\nImmediate attention required.",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _alertShown = false; // reset after acknowledgment
-            },
-            child: const Text("OK"),
+      builder:
+          (_) => AlertDialog(
+            title: const Text("🚨 Critical Alert"),
+            content: const Text(
+              "Abnormal cattle health readings detected.\nImmediate attention required.",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _alertShown = false; // reset after acknowledgment
+                },
+                child: const Text("OK"),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -136,7 +134,6 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
       _showCriticalAlert();
     }
   }
-
 
   String? _formatValue(dynamic value) {
     if (value == null) return null;
@@ -278,7 +275,6 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
 
   @override
   Widget build(BuildContext context) {
-
     if (field1 == null ||
         field2 == null ||
         field3 == null ||
@@ -414,22 +410,23 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AlertDialog(
-        title: const Text("🚨 Critical Alert"),
-        content: const Text(
-          "Abnormal health readings detected.\nImmediate veterinary attention is required.",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _alertShown = false; // allow future alerts if values worsen again
-            },
-            child: const Text("OK"),
+      builder:
+          (_) => AlertDialog(
+            title: const Text("🚨 Critical Alert"),
+            content: const Text(
+              "Abnormal health readings detected.\nImmediate veterinary attention is required.",
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _alertShown =
+                      false; // allow future alerts if values worsen again
+                },
+                child: const Text("OK"),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
-
 }
