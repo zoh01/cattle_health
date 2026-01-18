@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:cattle_health/screens/dashboard/widgets/health_score_card.dart';
 import 'package:cattle_health/utils/constants/image_string.dart';
 import 'package:cattle_health/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import '../../models/helper_class/disease_explanations.dart';
 import '../../models/shimmer/shimmer_loader.dart';
 import '../../services/api_data.dart';
 
@@ -19,7 +19,9 @@ class ZohSpeakScreens extends StatefulWidget {
   State<ZohSpeakScreens> createState() => _ThingSpeakScreenState();
 }
 
+final AudioPlayer _audioPlayer = AudioPlayer();
 bool _alertShown = false;
+
 class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
   String? field1, field2, field3, field4, field5; // Current values
   String? prevField1,
@@ -46,6 +48,41 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  /// Alert Dialog
+  void _showCriticalAlert() async {
+    if (_alertShown) return; // prevent spam
+
+    _alertShown = true;
+
+    // 🔊 Play alert sound
+    await _audioPlayer.play(
+      AssetSource('sounds/alert.mp3'),
+      volume: 1.0,
+    );
+
+    if (!mounted) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: const Text("🚨 Critical Alert"),
+        content: const Text(
+          "Abnormal cattle health readings detected.\nImmediate attention required.",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _alertShown = false; // reset after acknowledgment
+            },
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
   }
 
   /// Load Latest Data On StartUp
@@ -92,14 +129,14 @@ class _ThingSpeakScreenState extends State<ZohSpeakScreens> {
       field5 = _formatValue(feed["field5"]);
     });
 
-    // 🔔 Trigger alert AFTER state update
-    if (!_alertShown && isCriticalReading()) {
-      _alertShown = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        showCriticalDialog();
-      });
+    // 🚨 AFTER updating values, check health
+    final status = detectCattleHealth();
+
+    if (status.startsWith("Issues")) {
+      _showCriticalAlert();
     }
   }
+
 
   String? _formatValue(dynamic value) {
     if (value == null) return null;
